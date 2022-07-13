@@ -69,3 +69,14 @@ func UpdateProduct(c *gin.Context) {
 //		c.JSON(http.StatusOK, gin.H{"id" + id: "is deleted"})
 //	}
 //}
+
+func GetTransactionsByID(c *gin.Context) {
+	id := c.Params.ByName("id")  // retailerId
+	var orders []Models.Order
+	err := Models.GetTransactionsByID(&orders, id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, orders)
+	}
+}

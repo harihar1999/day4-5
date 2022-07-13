@@ -42,3 +42,5 @@ func UpdateProduct(product *Product, id string) (err error) {
 //	Config.DB.Where("id = ?", id).Delete(user)
 //	return nil
 //}
+
+

@@ -5,6 +5,7 @@ type Product struct {
 	ProductName string `json:"product_name"`
 	Price       uint   `json:"price"`
 	Quantity    uint   `json:"quantity"`
+	RetailerId  uint   `json:"retailer_id"`
 }
 
 func (b *Product) TableName() string {

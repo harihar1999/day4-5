@@ -1,7 +1,9 @@
 package Models
 
+import "github.com/jinzhu/gorm"
+
 type Order struct {
-	Id         uint   `json:"id"`
+	gorm.Model
 	CustomerId uint   `json:"customer_id"`
 	ProductId  uint   `json:"product_id"`
 	Quantity   uint   `json:"quantity"`

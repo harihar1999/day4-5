@@ -21,7 +21,7 @@ func main() {
 
 		}
 	}(Config.DB)
-	Config.DB.AutoMigrate(&Models.Product{})
+	Config.DB.AutoMigrate(&Models.Product{}, &Models.Order{})
 	r := Routes.SetupRouter()
 	//running
 	err := r.Run()

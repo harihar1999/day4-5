@@ -6,14 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
+
 type newdata struct {
-	Id  uint
+	Id        uint
 	ProductId uint
-	Quantity uint
-	Status string
+	Quantity  uint
+	Status    string
 }
-
-
 
 func CreateOrder(c *gin.Context) {
 	var order Models.Order
@@ -22,16 +21,17 @@ func CreateOrder(c *gin.Context) {
 	//fmt.Println(user)
 	c.BindJSON(&order)
 	fmt.Println(order)
-	err := Models.CreateOrder(&order,&product)
+	err := Models.CreateOrder(&order, &product)
 	if err != nil {
 		fmt.Println(err.Error())
-		c.AbortWithStatus(http.StatusNotFound)
+		c.JSON(http.StatusBadRequest, gin.H{"err": "order not placed due to time constraint"})
+		//c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		new := newdata{
-			Id: order.Id,
+			Id:        order.ID,
 			ProductId: order.ProductId,
-			Quantity: order.Quantity,
-			Status: order.Status,
+			Quantity:  order.Quantity,
+			Status:    order.Status,
 		}
 		fmt.Println(new)
 		c.JSON(http.StatusOK, new)
@@ -51,11 +51,11 @@ func GetOrderByID(c *gin.Context) {
 	}
 }
 
-func GetOrdersByID(c *gin.Context){
+func GetOrdersByID(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var orders []Models.Order
-	err := Models.GetOrdersByID(&orders,id)
-	if err != nil{
+	err := Models.GetOrdersByID(&orders, id)
+	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		//var output string
