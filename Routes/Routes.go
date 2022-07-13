@@ -16,6 +16,7 @@ func SetupRouter() *gin.Engine {
 
 		grp1.POST("order", Controllers.CreateOrder)
 		grp1.GET("order/:id", Controllers.GetOrderByID)
+		grp1.GET("history/:id", Controllers.GetOrdersByID)
 	}
 	return r
 }
